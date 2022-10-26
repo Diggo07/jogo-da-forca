@@ -156,7 +156,7 @@ namespace jogo_da_forca
                 {
                     txtBracoEsquerdo.Visibility = Visibility.Visible;
                     letraerrada4 = txtPalavra.Text;
-                    txtLetrasErradas.Text = txtPalavra.Text + ", ";
+                    txtLetrasErradas.Text += txtPalavra.Text + ", ";
                     totalErros = 4;
                 }
                 else
@@ -205,8 +205,9 @@ namespace jogo_da_forca
                     MessageBox.Show("Você perdeu!", "Game Over!", MessageBoxButton.OK, MessageBoxImage.Error);
                     btnInserirLetra.Visibility = Visibility.Hidden;
                     txtPalavra.Text = "";
-                    EstadosIniciaisJogo();
                     VerificaVitoria();
+
+                    Reiniciar();
 
                 }
 
@@ -215,7 +216,6 @@ namespace jogo_da_forca
                     totalErros = 6;
                 }
 
-                totalErros = 0;
             }
 
         }
@@ -223,36 +223,24 @@ namespace jogo_da_forca
         private void VerificaVitoria()
         {
 
-            if (acertosDaPalavra == palavraInformada && totalErros != 7)
+            if (acertosDaPalavra == palavraInformada)
             {
                 acertosDaPalavra = "";
                 MessageBox.Show("Você Ganhou!", "Parabéns!", MessageBoxButton.OK, MessageBoxImage.Information);
                 btnInserirLetra.Visibility = Visibility.Hidden;
-                EstadosIniciaisJogo();
+
+                Reiniciar();
             }
             
         }
 
-        private void EstadosIniciaisJogo()
-        {
-            btnJogar.Visibility = Visibility.Visible;
-            txtPalavra.MaxLength = 200;
-            txtBracoDireito.Visibility = Visibility.Hidden;
-            txtBracoEsquerdo.Visibility = Visibility.Hidden;
-            txtPernaDireita.Visibility = Visibility.Hidden;
-            txtPernaEsquerda.Visibility = Visibility.Hidden;
-            txtCorpo.Visibility = Visibility.Hidden;
-            txtCabeca.Visibility = Visibility.Hidden;
+        
 
-            txtLetrasErradas.Text = "";
-            txtFrase.Text = "";
-            palavraInformada = "";
-            letraerrada1 = "";
-            letraerrada2 = "";
-            letraerrada3 = "";
-            letraerrada4 = "";
-            letraerrada5 = "";
-            letraerrada6 = "";
+        private void Reiniciar()
+        {
+            MainWindow frmMainWindow = new MainWindow();
+            frmMainWindow.Show();
+            Close();
         }
         
     }
